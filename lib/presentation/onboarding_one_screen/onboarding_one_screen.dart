@@ -1,0 +1,139 @@
+import 'bloc/onboarding_one_bloc.dart';
+import 'models/onboarding_one_model.dart';
+import 'package:amir_s_application1/core/app_export.dart';
+import 'package:amir_s_application1/widgets/custom_icon_button.dart';
+import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+class OnboardingOneScreen extends StatelessWidget {
+  const OnboardingOneScreen({Key? key}) : super(key: key);
+
+  static Widget builder(BuildContext context) {
+    return BlocProvider<OnboardingOneBloc>(
+        create: (context) => OnboardingOneBloc(
+            OnboardingOneState(onboardingOneModelObj: OnboardingOneModel()))
+          ..add(OnboardingOneInitialEvent()),
+        child: OnboardingOneScreen());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    mediaQueryData = MediaQuery.of(context);
+    return BlocBuilder<OnboardingOneBloc, OnboardingOneState>(
+        builder: (context, state) {
+      return SafeArea(
+          child: Scaffold(
+              body: SizedBox(
+                  width: 358.h,
+                  child: SingleChildScrollView(
+                      child: Padding(
+                          padding: EdgeInsets.only(bottom: 44.v),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                    height: 328.v,
+                                    width: 358.h,
+                                    child: Stack(
+                                        alignment: Alignment.bottomCenter,
+                                        children: [
+                                          CustomImageView(
+                                              imagePath:
+                                                  ImageConstant.imgGroup1,
+                                              height: 268.v,
+                                              width: 358.h,
+                                              alignment: Alignment.topCenter),
+                                          CustomImageView(
+                                              imagePath: ImageConstant
+                                                  .imgInformationtabrafiki,
+                                              height: 261.v,
+                                              width: 348.h,
+                                              alignment: Alignment.bottomCenter)
+                                        ])),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 32.h, top: 86.v),
+                                    child: Text("msg_welcome_to_systecx".tr,
+                                        style: CustomTextStyles
+                                            .titleMediumBluegray400)),
+                                Container(
+                                    width: 275.h,
+                                    margin: EdgeInsets.only(
+                                        left: 32.h, top: 13.v, right: 49.h),
+                                    child: Text("msg_trading_analytics".tr,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: theme.textTheme.headlineMedium!
+                                            .copyWith(height: 1.54))),
+                                Container(
+                                    height: 4.v,
+                                    margin:
+                                        EdgeInsets.only(left: 35.h, top: 105.v),
+                                    child: AnimatedSmoothIndicator(
+                                        activeIndex: 0,
+                                        count: 3,
+                                        effect: ScrollingDotsEffect(
+                                            spacing: 7,
+                                            activeDotColor: appTheme.red400,
+                                            dotColor: appTheme.gray40001,
+                                            dotHeight: 4.v,
+                                            dotWidth: 36.h))),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 32.h, top: 85.v, right: 28.h),
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 16.v, bottom: 11.v),
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text("lbl_skip".tr,
+                                                            style: CustomTextStyles
+                                                                .titleMediumPrimaryContainer),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 1.v),
+                                                            child: SizedBox(
+                                                                width: 22.h,
+                                                                child: Divider(
+                                                                    color: appTheme
+                                                                        .red400,
+                                                                    indent:
+                                                                        4.h)))
+                                                      ])),
+                                              CustomIconButton(
+                                                  height: 51.v,
+                                                  width: 54.h,
+                                                  padding: EdgeInsets.all(16.h),
+                                                  onTap: () {
+                                                    onTapBtnArrowrightone(
+                                                        context);
+                                                  },
+                                                  child: CustomImageView(
+                                                      svgPath: ImageConstant
+                                                          .imgArrowright))
+                                            ])))
+                              ]))))));
+    });
+  }
+
+  /// Navigates to the onboardingTwoScreen when the action is triggered.
+  ///
+  /// The [BuildContext] parameter is used to build the navigation stack.
+  /// When the action is triggered, this function uses the [NavigatorService]
+  /// to push the named route for the onboardingTwoScreen.
+  onTapBtnArrowrightone(BuildContext context) {
+    NavigatorService.pushNamed(
+      AppRoutes.onboardingTwoScreen,
+    );
+  }
+}
